@@ -1,0 +1,75 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+class A {
+	Configuration conf = HbaseConfiguration.create();
+	HBaseAdmin hadmin = new HBaseAdmin(conf);
+
+	HTableDescriptor tableDesc = new HTableDescriptor(TableName.valueOf("emp"));
+
+	tableDesc.addFamily(new HColumnDescriptor("personal".getBytes()));tableDesc.addFamily(new HCOlumnDescriptor("professional".getBytes()));
+
+	hadmin.createTable(tableDesc);
+
+	Htable htable = new HTable(conf, "emp");
+
+	// put or insert data
+
+	Put p = new Put(Bytes.toBytes("row1"));
+
+	p.add(Bytes.toBytes("personal"),Bytes.toBytes("name"),Bytes.toBytes("bharath"));
+	htable.put(p);
+
+	// get or read data
+	Get g = new Get(Bytes.toBytes("row1"));
+	Result res = htable.get(g);
+
+	byte[] val = res.getValue(Bytes.toBytes("personal"), Bytes.toBytes("name"));
+
+	Srting name = Bytes.toString(val);
+
+	htable.close();
+
+	// scan
+	Htable ht = new Htable(conf, "emp");
+	Scan sc = new Scan();
+
+	sc.addColumn(Bytes.toBytes("personal"),Bytes.toBytes("name"));sc.addColumn(Bytes.toBytes("personal"),Bytes.toBytes("city"));
+
+	ResultScanner rs=ht.getScanner(sc);
+
+	for(
+	Result r=rs.next();r!=null;r=rs.next())
+	{
+		System.out.println(r);
+	}
+}
+
+public class Sample {
+
+	public static void main(String[] args) {
+
+		// TODO Auto-generated method stub
+		List<String> lst = new ArrayList<String>();
+		lst.add("dale deal");
+		lst.add("dale lade");
+		lst.add("teaching cheating");
+		Map<String, String> hm = new HashMap<String, String>();
+		for (String s : lst) {
+			String[] arr = s.split(" ");
+			if (hm.containsKey(arr[0])) {
+				String temp = hm.get(arr[0]) + " " + arr[1];
+				hm.put(arr[0], temp);
+			} else {
+				hm.put(arr[0], arr[1]);
+			}
+		}
+		for (String s : hm.keySet()) {
+			System.out.println(s + " " + hm.get(s));
+		}
+
+	}
+
+}

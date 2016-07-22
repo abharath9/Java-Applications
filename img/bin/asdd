@@ -1,0 +1,26 @@
+import java.io.* ;
+import java.sql.*
+class getEmpInfo {
+public static void main (String args []) throws SQLException, IOException {
+try { Class.forName("oracle.jdbc.driver.OracleDriver")
+} catch (ClassNotFoundException x) {
+System.out.println ("Driver could not be loaded") ;
+}
+ String dbacct, passwrd, ssn, lname ;
+Double salary ;
+dbacct = readentry("Enter database account:") ;
+ passwrd = readentry("Enter password:") ;
+Connection conn = DriverManager.getConnection
+("jdbc:oracle:oci8:" + dbacct + "/" + passwrd) ;
+ String stmt1 = "select Lname, Salary from EMPLOYEE where Ssn = ?" ;
+ PreparedStatement p = conn.prepareStatement(stmt1) ;
+ ssn = readentry("Enter a Social Security Number: ") ;
+ p.clearParameters() ;
+ p.setString(1, ssn) ;
+ ResultSet r = p.executeQuery() ;
+ while (r.next()) {
+ lname = r.getString(1) ;
+ salary = r.getDouble(2) ;
+ system.out.printline(lname + salary) ;
+ } }
+ }

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;t1&apos; in &apos;PrintEvenOddTester.main(...)&apos; to &apos;oddThread&apos;&#x0D;&#x0A;- Original project: &apos;Practice&apos;&#x0D;&#x0A;- Original element: &apos;PrintEvenOddTester.main(String...).t1&apos;&#x0D;&#x0A;- Renamed element: &apos;t1&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;t1&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{PrintEvenOddTester.java[PrintEvenOddTester~main~\[QString;@t1!1425!1482!1432!1433!QThread;!0!false" name="oddThread" references="true" stamp="1464563223700" version="1.0"/>
+</session>
